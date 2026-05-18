@@ -1,0 +1,989 @@
+/* ============================================================
+   style.css — Anniversary Website
+   ============================================================ */
+
+/* ─── RESET & BIẾN MÀU ─── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --pink-1: #fff0f5;
+  --pink-2: #ffd6e7;
+  --pink-3: #ffb3cf;
+  --pink-4: #ff85b3;
+  --pink-5: #ff5c98;
+  --rose:   #e8427a;
+  --deep:   #c2185b;
+  --lavender: #f3e5f5;
+}
+html { scroll-behavior: smooth; }
+
+/* Con trỏ hình trái tim */
+body {
+  font-family: 'Nunito', sans-serif;
+  background: #000;
+  min-height: 100vh;
+  overflow: hidden; /* BLOCK SCROLLING BY DEFAULT FOR LOCKED VIEWPORT */
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff85b3' d='M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z'/%3E%3C/svg%3E"), auto;
+}
+
+
+/* ============================================================
+   SCREEN LAYERS (dùng chung cho màn 1 & 2)
+   ============================================================ */
+.screen {
+  position: fixed; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  transition: opacity 0.8s ease;
+  z-index: 10;
+}
+.screen.hidden { opacity: 0; pointer-events: none; }
+
+
+/* ============================================================
+   MÀN 1 — MẬT KHẨU  (Kawaii style)
+   ============================================================ */
+#screenPass {
+  background: #fff9f3; /* Butter cream! */
+  z-index: 30; overflow: hidden;
+}
+
+/* Nền sao trắng nhỏ */
+.pass-stars-bg {
+  position: absolute; inset: 0; overflow: hidden;
+  background-image: 
+    linear-gradient(90deg, rgba(255, 179, 198, 0.16) 1.5px, transparent 1.5px),
+    linear-gradient(rgba(255, 179, 198, 0.16) 1.5px, transparent 1.5px);
+  background-size: 36px 36px;
+  opacity: 0.95;
+}
+.pass-star {
+  position: absolute; border-radius: 50%;
+  background: #ffb3c6;
+  opacity: 0.2;
+  animation: twinkle linear infinite;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.8); }
+  50%       { opacity: 0.6;    transform: scale(1.3); }
+}
+
+/* Sao màu sắc sparkle */
+.pass-sparkles { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.pass-sparkle  { position: absolute; font-size: 14px; animation: sparkleDrift ease-in-out infinite; }
+@keyframes sparkleDrift {
+  0%, 100% { opacity: 0.4; transform: scale(0.8) rotate(-10deg); }
+  50%       { opacity: 1;   transform: scale(1.3) rotate(15deg); }
+}
+
+/* Mây pastel ngọt ngào phía dưới */
+.pass-clouds { 
+  position: absolute; bottom: 0; left: 0; right: 0; height: 260px; 
+  pointer-events: none; z-index: 2; overflow: hidden; 
+}
+.pass-cloud { 
+  position: absolute;
+  background: radial-gradient(ellipse at 60% 40%, #ffffff 0%, #fff0f3 50%, #ffd6e0 100%);
+  border: 3px solid #ffccd7;
+  border-radius: 50%;
+  box-shadow: 
+    0 0 25px rgba(255, 179, 198, 0.25),
+    inset 0 8px 30px rgba(255, 255, 255, 0.6);
+}
+.pc1 { width: 380px; height: 380px; left: -110px; bottom: -175px; z-index: 5; }
+.pc2 { width: 260px; height: 260px; left: 130px; bottom: -155px; z-index: 4; }
+.pc3 { display: none; }
+.pc4 { width: 260px; height: 260px; right: 130px; bottom: -155px; z-index: 4; }
+.pc5 { width: 380px; height: 380px; right: -110px; bottom: -175px; z-index: 5; }
+
+/* ─── Thú cưng trang trí ─── */
+.pass-animal {
+  position: absolute; pointer-events: none;
+  filter: drop-shadow(0 10px 24px rgba(255, 133, 179, 0.35));
+}
+.pass-animal img {
+  width: 100%; height: 100%; object-fit: contain;
+  background: transparent;
+}
+.pass-bunny {
+  position: absolute;
+  left: -120px; top: 28%;
+  width: 185px; z-index: 8;
+  animation: animalFloat 3.5s ease-in-out infinite;
+  animation-delay: 0s;
+}
+.pass-bear {
+  position: absolute;
+  right: -120px; top: 28%;
+  width: 185px; z-index: 8;
+  animation: animalFloat 3.5s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+.pass-lamb {
+  position: absolute;
+  left: 20px; bottom: 30px;
+  width: 165px; z-index: 15;
+  animation: animalFloat 3.5s ease-in-out infinite;
+  animation-delay: 1s;
+  transition: all 0.3s ease;
+}
+.pass-sheep {
+  position: absolute;
+  right: 20px; bottom: 30px;
+  width: 165px; z-index: 15;
+  animation: animalFloat 3.5s ease-in-out infinite;
+  animation-delay: 1.5s;
+  transition: all 0.3s ease;
+}
+
+@keyframes animalFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+/* Chi tiết trang trí bay quanh thẻ chuẩn mẫu */
+.pass-decor {
+  position: absolute;
+  pointer-events: none;
+  z-index: 16;
+  animation: floatDecor 3s ease-in-out infinite;
+  filter: drop-shadow(0 2px 8px rgba(255, 133, 179, 0.45));
+}
+@keyframes floatDecor {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-5px) scale(1.05); }
+}
+
+.decor-heart-left {
+  left: -130px; top: 55%;
+  font-size: 19px;
+  animation-delay: 0.2s;
+}
+.decor-paw-right {
+  right: -125px; top: 62%;
+  font-size: 20px;
+  color: #c084fc;
+  animation-delay: 0.6s;
+  filter: drop-shadow(0 2px 8px rgba(192, 132, 252, 0.45));
+}
+.decor-star-left {
+  left: -150px; top: 76%;
+  font-size: 17px;
+  animation-delay: 1s;
+}
+.decor-heart-top-left {
+  left: -28px; top: -22px;
+  font-size: 18px;
+  animation-delay: 1.4s;
+}
+.decor-heart-top-right {
+  right: -20px; top: -16px;
+  font-size: 16px;
+  animation-delay: 0.8s;
+}
+
+/* 📱 PHONE WRAPPER: Responsive container for smartphone and peeking characters */
+.phone-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 360px;
+  z-index: 10;
+  margin-top: 15px;
+}
+
+/* ─── Hộp nhập mật khẩu (Smartphone Card) ─── */
+.pass-box {
+  position: relative; z-index: 15;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  padding: 42px 20px 22px;
+  background: rgba(255, 253, 249, 0.68); /* Sweet cream dairy page with dreamy transparency! */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.85); /* Viền sáng nhẹ (glowing white border) */
+  border-radius: 46px;
+  max-width: 340px; width: 90%;
+  min-height: 520px;
+  box-shadow: 
+    0 24px 60px rgba(255, 133, 179, 0.16), /* Bóng đổ mềm (soft outer shadow) */
+    inset 0 0 24px rgba(255, 255, 255, 0.65); /* Soft inner glow */
+}
+
+/* Khoá gấu dễ thương đè lên viền trên */
+.pass-lock {
+  position: absolute;
+  top: -54px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 12;
+  animation: pulse 2.2s ease-in-out infinite;
+  margin-bottom: 0;
+  filter: drop-shadow(0 8px 20px rgba(255, 133, 179, 0.35));
+}
+@keyframes pulse { 0%,100%{transform:scale(1) translateX(-50%);}50%{transform:scale(1.06) translateX(-50%);} }
+
+.pass-title {
+  font-family: 'Dancing Script', 'Nunito', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #7d495d; /* Warm retro berry color! */
+  text-align: center; line-height: 1.25;
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
+}
+.pass-hint { 
+  font-size: 12.5px; 
+  color: #b08293; /* Soft retro rose-brown! */
+  text-align: center; 
+  letter-spacing: 0.3px; 
+}
+
+/* Dots — trái tim */
+.pass-dots { display: flex; gap: 18px; margin: 4px 0; }
+.pass-dot {
+  font-size: 26px; line-height: 1;
+  color: #ffd6e0;
+  transition: all 0.25s; display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px;
+  visibility: hidden;
+}
+.pass-dot::before {
+  content: "♡";
+  visibility: visible;
+  display: block;
+}
+.pass-dot.filled::before {
+  content: "❤";
+  visibility: visible;
+}
+.pass-dot.filled {
+  color: #ff5c98;
+  filter: drop-shadow(0 2px 4px rgba(255, 92, 152, 0.3));
+  transform: scale(1.2);
+}
+
+/* Bàn phím số thiết kế Retro bong bóng cực xịn */
+.pass-keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px 14px; width: 100%; }
+.pass-key {
+  height: 50px; border-radius: 18px;
+  border: 1.5px solid rgba(255, 255, 255, 0.7); /* Viền sáng nhẹ */
+  background: rgba(255, 255, 255, 0.45); /* Nền mờ */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #7d495d; font-size: 20px;
+  font-family: 'Itim', sans-serif; font-weight: 700;
+  cursor: pointer; transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 12px rgba(255, 133, 179, 0.06); /* Bóng đổ mềm */
+}
+.pass-key:hover  {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 8px 20px rgba(255, 133, 179, 0.15); /* Bóng đổ mềm và rộng hơn khi hover */
+  transform: translateY(-3px);
+}
+.pass-key:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px rgba(255, 133, 179, 0.08);
+}
+.key-icon {
+  font-size: 13px;
+  margin-left: 5px;
+}
+.key-envelope {
+  color: #ff85b3 !important;
+  font-size: 22px !important;
+}
+.key-clear {
+  color: #ff5c98 !important;
+  font-size: 18px !important;
+  font-weight: 900 !important;
+}
+
+/* Thông báo lỗi */
+.pass-error {
+  position: absolute; bottom: -38px; left: 0; right: 0;
+  text-align: center; color: #ff5c98; font-size: 13px; font-weight: 600;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.pass-error.show { opacity: 1; animation: shake 0.4s ease; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%       { transform: translateX(-8px); }
+  75%       { transform: translateX(8px); }
+}
+
+/* Trái tim phát sáng ở đáy điện thoại */
+.pass-bottom-heart {
+  position: relative; margin-top: 10px;
+  font-size: 32px; z-index: 11;
+  display: flex; align-items: center; justify-content: center;
+  animation: heartBeat 1.6s ease-in-out infinite;
+  filter: drop-shadow(0 4px 12px rgba(255,92,152,0.55));
+}
+.pass-bottom-heart::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 104px;
+  height: 20px;
+  background: radial-gradient(ellipse at center, rgba(255, 133, 179, 0.2) 0%, rgba(255, 133, 179, 0) 70%);
+  border: 1.5px solid rgba(255, 133, 179, 0.95);
+  border-radius: 50%;
+  transform: translate(-50%, -12%) rotate(-8deg);
+  box-shadow: 
+    0 0 20px rgba(255, 133, 179, 0.9), 
+    inset 0 0 12px rgba(255, 133, 179, 0.9),
+    0 0 35px rgba(255, 100, 200, 0.65);
+  pointer-events: none;
+  z-index: -1;
+}
+@keyframes heartBeat {
+  0%,100%{transform: scale(1);}
+  30%{transform: scale(1.22);}
+  60%{transform: scale(0.97);}
+}
+
+/* 🌠 Hiệu ứng sao băng vũ trụ lung linh */
+.shooting-star-left {
+  position: absolute;
+  top: 10%; left: 8%;
+  width: 130px; height: 2px;
+  background: linear-gradient(90deg, rgba(125, 211, 252, 0.8), transparent);
+  transform: rotate(-35deg);
+  filter: drop-shadow(0 0 8px #7dd3fc);
+  animation: shoot 7s linear infinite;
+  opacity: 0;
+  pointer-events: none;
+}
+.shooting-star-right {
+  position: absolute;
+  top: 20%; right: -5%;
+  width: 150px; height: 2px;
+  background: linear-gradient(90deg, rgba(244, 63, 94, 0.8), transparent);
+  transform: rotate(-35deg);
+  filter: drop-shadow(0 0 8px #fb7185);
+  animation: shoot 9s linear infinite;
+  animation-delay: 2.5s;
+  opacity: 0;
+  pointer-events: none;
+}
+@keyframes shoot {
+  0% { transform: translate(0, 0) rotate(-35deg); opacity: 0; }
+  5% { opacity: 0.85; }
+  15% { transform: translate(-280px, 196px) rotate(-35deg); opacity: 0; }
+  100% { transform: translate(-280px, 196px) rotate(-35deg); opacity: 0; }
+}
+
+
+/* ============================================================
+   MÀN 2 — GALAXY
+   ============================================================ */
+#screenGalaxy { background: #000; z-index: 20; }
+#galaxyBigCanvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.galaxy-content {
+  position: relative; z-index: 5;
+  display: flex; flex-direction: column; align-items: center; gap: 0;
+  pointer-events: none;
+}
+
+/* 📝 Hộp thơ tình yêu bên trái (TikTok Poetry Card) */
+.galaxy-poetry-card {
+  position: fixed;
+  left: 4.5vw;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 15;
+  max-width: 320px;
+  padding: 24px 30px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.25),
+    inset 0 0 15px rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+  animation: slideRightIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.poetry-line {
+  font-family: 'Dancing Script', cursive;
+  font-size: 21px;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.6;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(255, 133, 179, 0.45);
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: fadeSlideLine 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideRightIn {
+  0% { transform: translateY(-50%) translateX(-40px); opacity: 0; }
+  100% { transform: translateY(-50%) translateX(0); opacity: 1; }
+}
+
+@keyframes fadeSlideLine {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Responsive cho màn hình hẹp */
+@media (max-width: 900px) {
+  .galaxy-poetry-card {
+    position: relative;
+    left: auto; top: auto;
+    transform: none;
+    margin: 20px auto 25px auto;
+    width: 88%; max-width: 380px;
+    animation: fadeUpPoetry 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes fadeUpPoetry {
+    0% { transform: translateY(20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes slideRightIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+}
+
+
+/* 🌌 Lõi vũ trụ Galaxy cực kỳ lộng lẫy (Cosmic Countdown Core) */
+.cosmic-core-wrap {
+  position: relative;
+  width: 280px; height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  margin: 40px auto 20px auto;
+  pointer-events: none;
+}
+.cosmic-aura {
+  position: absolute;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 133, 179, 0.28) 0%, rgba(192, 100, 255, 0.16) 40%, rgba(56, 189, 248, 0.08) 60%, transparent 80%);
+  animation: cosmicPulse 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(10px);
+}
+@keyframes cosmicPulse {
+  0%, 100% { transform: scale(1);    opacity: 0.85; }
+  50%       { transform: scale(1.18); opacity: 1; }
+}
+
+/* Vòng tròn đếm ngược */
+.timer-ring-wrap {
+  position: relative;
+  width: 140px; height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+}
+.timer-ring-wrap svg {
+  position: absolute;
+  top: 0; left: 0;
+  transform: rotate(-90deg);
+  filter: drop-shadow(0 0 15px rgba(255, 133, 179, 0.35));
+}
+.timer-ring-bg {
+  stroke: rgba(255, 255, 255, 0.06);
+  fill: none;
+}
+.timer-ring-fg {
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear;
+}
+
+/* Trái tim neon nhịp đập tại tâm vũ trụ */
+.cosmic-heart-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+}
+.pulsing-heart {
+  animation: heartPulse 1.2s ease-in-out infinite;
+  opacity: 0.35;
+  filter: drop-shadow(0 0 12px rgba(255, 133, 179, 0.85));
+}
+@keyframes heartPulse {
+  0%, 100% { transform: scale(1);    filter: drop-shadow(0 0 12px rgba(255, 133, 179, 0.85)); }
+  50%       { transform: scale(1.15); filter: drop-shadow(0 0 25px rgba(255, 133, 179, 1)); }
+}
+
+.timer-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Itim', cursive;
+  font-size: 38px;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 0 10px #ffffff, 0 0 20px #ff85b3, 0 0 35px #c084fc;
+  z-index: 2;
+}
+.portrait-name {
+  margin-top: 24px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 34px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ff85b3, #c084fc, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 12px rgba(255, 133, 179, 0.6));
+}
+
+/* Nút mở thư */
+.letter-reveal-btn {
+  position: relative; z-index: 5; pointer-events: all;
+  margin-top: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50px; padding: 14px 36px;
+  font-family: 'Dancing Script', cursive; font-size: 22px;
+  color: #fff; cursor: pointer;
+  box-shadow: 0 10px 30px rgba(255, 133, 179, 0.25), inset 0 0 15px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0; transform: translateY(20px);
+}
+.letter-reveal-btn.visible { opacity: 1; transform: translateY(0); transition: opacity 0.8s ease, transform 0.8s ease; }
+.letter-reveal-btn:hover   { background: rgba(255, 255, 255, 0.25); border-color: rgba(255, 255, 255, 0.65); box-shadow: 0 15px 45px rgba(255, 133, 179, 0.45); transform: scale(1.06) translateY(-2px); }
+
+/* Trái tim bay trên màn galaxy */
+.floating-heart { position: fixed; pointer-events: none; z-index: 6; animation: floatUp linear forwards; }
+@keyframes floatUp {
+  0%   { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.85; }
+  100% { transform: translateY(-90vh) rotate(360deg) scale(0.4); opacity: 0; }
+}
+
+
+/* ============================================================
+   MÀN 3 — TRANG HỒNG (scrollable)
+   ============================================================ */
+#screenPink {
+  position: relative; display: none; /* HIDE INITIALLY TO PREVENT LAYOUT OVERFLOW */
+  background: linear-gradient(135deg, #fff0f5 0%, #fce4ec 30%, #f3e5f5 60%, #ffd6e7 100%);
+  min-height: 100vh; overflow-x: hidden;
+  opacity: 1; pointer-events: all;
+  transform: translateY(100vh); transition: transform 0s;
+}
+#screenPink.slide-in { transform: translateY(0); }
+
+/* Canvas cánh hoa rơi */
+#petalCanvas { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 0; }
+
+/* ─── MUSIC PLAYER ─── */
+.music-player {
+  position: fixed; top: 20px; right: 20px; z-index: 1000;
+  background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.85); border-radius: 50px;
+  padding: 10px 18px; display: flex; align-items: center; gap: 10px;
+  box-shadow: 0 10px 30px rgba(255, 133, 179, 0.18), inset 0 0 10px rgba(255, 255, 255, 0.5);
+  cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+}
+.music-player:hover { transform: scale(1.05); box-shadow: 0 12px 40px rgba(255,133,179,0.35); }
+.music-icon { font-size: 20px; animation: spin 4s linear infinite; display: inline-block; }
+.music-icon.paused { animation-play-state: paused; }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.music-label { font-size: 13px; color: var(--rose); font-weight: 600; white-space: nowrap; }
+.music-wave  { display: flex; gap: 2px; align-items: flex-end; height: 16px; }
+.wave-bar    { width: 3px; background: var(--pink-4); border-radius: 2px; animation: waveAnim 0.8s ease-in-out infinite; }
+.wave-bar:nth-child(1) { animation-delay: 0s; }
+.wave-bar:nth-child(2) { animation-delay: 0.15s; }
+.wave-bar:nth-child(3) { animation-delay: 0.3s; }
+@keyframes waveAnim { 0%, 100% { height: 4px; } 50% { height: 16px; } }
+.wave-bar.paused { animation-play-state: paused; }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative; z-index: 1; padding: 40px 20px; text-align: center; overflow: hidden;
+}
+/* Hero Decorations */
+.hero-decor { position: absolute; pointer-events: none; z-index: 0; animation: floatDecor 4s ease-in-out infinite; }
+.hero-bunny { left: 8%; top: 20%; width: 140px; animation-delay: 0s; filter: drop-shadow(0 10px 15px rgba(255,133,179,0.3)); }
+.hero-bear  { right: 8%; top: 25%; width: 150px; animation-delay: 1s; filter: drop-shadow(0 10px 15px rgba(255,133,179,0.3)); }
+.hero-cat   { left: 15%; bottom: 15%; width: 120px; animation-delay: 2s; filter: drop-shadow(0 10px 15px rgba(255,133,179,0.3)); }
+.hero-sheep { right: 15%; bottom: 10%; width: 130px; animation-delay: 1.5s; filter: drop-shadow(0 10px 15px rgba(255,133,179,0.3)); }
+
+.hero-heart { font-size: 36px; filter: drop-shadow(0 4px 8px rgba(255,133,179,0.4)); opacity: 0.9; }
+.hh-1 { left: 18%; top: 12%; animation-delay: 0.5s; }
+.hh-2 { right: 22%; top: 15%; animation-delay: 1.2s; }
+.hh-3 { left: 25%; bottom: 25%; animation-delay: 2.5s; }
+.hh-4 { right: 20%; bottom: 30%; animation-delay: 0.8s; }
+
+@media (max-width: 900px) {
+  .hero-bunny { left: -20px; width: 100px; }
+  .hero-bear { right: -20px; width: 110px; }
+  .hero-cat, .hero-sheep { display: none; }
+}
+
+.hero-badge {
+  background: linear-gradient(135deg, var(--pink-2), var(--lavender));
+  border: 2px solid var(--pink-3); border-radius: 50px;
+  padding: 8px 24px; font-size: 13px; color: var(--rose); font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase; margin-bottom: 24px;
+  animation: fadeDown 1s ease both;
+}
+.hero-title {
+  font-family: 'Dancing Script', cursive; font-size: clamp(52px, 10vw, 96px);
+  background: linear-gradient(135deg, #e8427a, #ff85b3, #c2185b, #ff5c98);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  line-height: 1.1; margin-bottom: 16px; animation: fadeDown 1.2s ease 0.2s both;
+}
+.hero-sub {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: clamp(18px, 3.5vw, 28px); color: var(--rose); margin-bottom: 32px;
+  animation: fadeDown 1.2s ease 0.4s both;
+}
+.countdown-wrap { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; animation: fadeDown 1.2s ease 0.6s both; }
+.count-box {
+  background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255, 255, 255, 0.85); border-radius: 20px;
+  padding: 16px 20px; min-width: 90px;
+  box-shadow: 0 10px 25px rgba(255, 133, 179, 0.08), inset 0 0 10px rgba(255, 255, 255, 0.5);
+}
+.count-num   { font-size: 36px; font-weight: 700; color: var(--rose); font-family: 'Dancing Script', cursive; display: block; }
+.count-label { font-size: 11px; color: #c2185b; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
+@keyframes fadeDown { from { opacity: 0; transform: translateY(-24px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ─── SECTION TITLE (dùng chung) ─── */
+.section-title {
+  font-family: 'Dancing Script', cursive; font-size: clamp(36px, 6vw, 56px);
+  color: var(--rose); text-align: center; margin-bottom: 48px; position: relative;
+}
+.section-title::after {
+  content: ''; display: block; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--pink-4), transparent);
+  border-radius: 2px; margin: 10px auto 0; width: 60%;
+}
+
+/* ─── THƯ TÌNH ─── */
+.letter-section { position: relative; z-index: 1; padding: 80px 20px; display: flex; flex-direction: column; align-items: center; }
+.letter-container {
+  max-width: 680px; width: 100%;
+  background: rgba(255,255,255,0.82); backdrop-filter: blur(12px);
+  border: 1.5px solid var(--pink-2); border-radius: 32px;
+  padding: 48px 52px; box-shadow: 0 16px 64px rgba(232,66,122,0.12);
+  position: relative; overflow: hidden;
+}
+.letter-container::before { content: '💌'; position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 40px; }
+.letter-lines {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(transparent, transparent 35px, rgba(255,182,213,0.15) 35px, rgba(255,182,213,0.15) 36px);
+  pointer-events: none;
+}
+.letter-text { font-family: 'Dancing Script', cursive; font-size: 22px; color: #4a1442; line-height: 1.85; position: relative; z-index: 1; min-height: 100px; }
+.letter-sign { font-family: 'Dancing Script', cursive; font-size: 28px; color: var(--rose); text-align: right; margin-top: 24px; position: relative; z-index: 1; font-weight: 700; }
+
+/* ─── ALBUM ẢNH ─── */
+.album-section { position: relative; z-index: 1; padding: 80px 20px; max-width: 900px; margin: 0 auto; }
+.album-grid    { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+.photo-frame {
+  position: relative; 
+  background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.95); border-radius: 16px;
+  padding: 12px 12px 48px;
+  box-shadow: 0 12px 40px rgba(232, 66, 122, 0.1);
+  transform: rotate(var(--rot, 0deg));
+  transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;
+}
+.photo-frame:hover { transform: rotate(0deg) scale(1.04) translateY(-6px); box-shadow: 0 20px 64px rgba(232,66,122,0.22); z-index: 10; }
+.photo-frame:nth-child(1) { --rot: -3deg;   }
+.photo-frame:nth-child(2) { --rot:  2deg;   }
+.photo-frame:nth-child(3) { --rot: -1.5deg; }
+.photo-frame:nth-child(4) { --rot:  3deg;   }
+.photo-frame:nth-child(5) { --rot: -2deg;   }
+.photo-frame:nth-child(6) { --rot:  1.5deg; }
+.photo-placeholder {
+  width: 100%; aspect-ratio: 1; border-radius: 8px;
+  background: linear-gradient(135deg, var(--pink-1), var(--pink-2), var(--lavender));
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  border: 2px dashed var(--pink-3); position: relative; overflow: hidden;
+}
+.photo-placeholder img            { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; display: none; }
+.photo-placeholder img.loaded     { display: block; }
+.photo-placeholder .add-icon      { font-size: 40px; opacity: 0.6; }
+.photo-placeholder .add-text      { font-size: 11px; color: var(--rose); font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 6px; }
+.photo-caption      { position: absolute; bottom: 0; left: 0; right: 0; height: 48px; padding: 6px 8px 10px; display: flex; align-items: center; justify-content: center; font-family: 'Dancing Script', cursive; font-size: 16px; color: #7b3d6e; text-align: center; }
+.photo-upload-input { position: absolute; inset: 0; opacity: 0; cursor: pointer; z-index: 5; }
+
+/* ─── TIMELINE ─── */
+.timeline-section { position: relative; z-index: 1; padding: 80px 20px; max-width: 900px; margin: 0 auto; }
+.timeline { position: relative; display: flex; flex-direction: column; gap: 40px; }
+/* Trục giữa */
+.timeline::before { 
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 4px; 
+  background: linear-gradient(180deg, var(--pink-4), var(--pink-2));
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+.tl-item { 
+  display: flex; align-items: center; justify-content: space-between;
+  position: relative; width: 100%;
+  opacity: 0; transform: translateY(30px); transition: all 0.6s ease; 
+}
+.tl-item.visible { opacity: 1; transform: translateY(0); }
+
+/* Odd items (Left) */
+.tl-item:nth-child(odd) {
+  flex-direction: row-reverse;
+}
+.tl-content { 
+  width: calc(50% - 40px); /* Leave space for dot */
+  background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);
+  border: 1px solid rgba(232, 66, 122, 0.15); border-radius: 20px; 
+  padding: 24px 28px; 
+  box-shadow: 0 12px 30px rgba(232, 66, 122, 0.08); 
+  position: relative;
+}
+/* Even items (Right) */
+.tl-item:nth-child(even) .tl-content {
+  text-align: left;
+}
+.tl-item:nth-child(odd) .tl-content {
+  text-align: right;
+}
+
+.tl-dot { 
+  width: 50px; height: 50px; 
+  background: #fff; border: 4px solid var(--pink-4); border-radius: 50%; 
+  display: flex; align-items: center; justify-content: center; font-size: 22px; 
+  box-shadow: 0 4px 12px rgba(232,66,122,0.2); z-index: 1; 
+  position: absolute; left: 50%; transform: translateX(-50%);
+}
+
+.tl-date  { font-size: 13px; font-weight: 800; color: var(--rose); text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 10px; }
+.tl-event { font-family: 'Playfair Display', serif; font-size: 22px; color: #8e1c4a; font-weight: 700; line-height: 1.45; margin-bottom: 8px; }
+.tl-desc  { font-size: 15px; color: #555; line-height: 1.6; font-weight: 400; }
+
+/* Mũi tên trỏ vào trục */
+.tl-item:nth-child(even) .tl-content::before {
+  content: ''; position: absolute; left: -10px; top: 50%; transform: translateY(-50%) rotate(45deg);
+  width: 20px; height: 20px; background: #fff;
+  border-left: 1px solid rgba(232, 66, 122, 0.15);
+  border-bottom: 1px solid rgba(232, 66, 122, 0.15);
+}
+.tl-item:nth-child(odd) .tl-content::before {
+  content: ''; position: absolute; right: -10px; top: 50%; transform: translateY(-50%) rotate(225deg);
+  width: 20px; height: 20px; background: #fff;
+  border-left: 1px solid rgba(232, 66, 122, 0.15);
+  border-bottom: 1px solid rgba(232, 66, 122, 0.15);
+}
+
+@media (max-width: 768px) {
+  .timeline::before { left: 30px; transform: none; }
+  .tl-dot { left: 30px; transform: translateX(-50%); }
+  .tl-item, .tl-item:nth-child(odd) { flex-direction: row; justify-content: flex-start; }
+  .tl-content { width: calc(100% - 70px); margin-left: 70px; text-align: left !important; }
+  .tl-item:nth-child(even) .tl-content::before, .tl-item:nth-child(odd) .tl-content::before {
+    left: -10px; right: auto; transform: translateY(-50%) rotate(45deg);
+  }
+}
+
+/* ─── HỘP QUÀ ─── */
+.gift-section { position: relative; z-index: 1; padding: 100px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.gift-box { 
+  position: relative; 
+  cursor: pointer; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+  user-select: none; width: 220px; height: 220px;
+  display: flex; align-items: flex-end; justify-content: center;
+  filter: drop-shadow(0 20px 40px rgba(232,66,122,0.3));
+}
+.gift-box:hover { transform: scale(1.05) translateY(-10px); }
+.gift-inner { 
+  width: 200px; height: 150px; 
+  background: linear-gradient(135deg, #ff75a6, #e8427a); 
+  border-radius: 12px; 
+  position: relative; 
+  box-shadow: inset 0 -10px 20px rgba(0,0,0,0.1);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1;
+}
+.gift-inner::before {
+  content: ''; position: absolute; width: 30px; height: 100%;
+  background: rgba(255,255,255,0.4); left: 50%; transform: translateX(-50%);
+}
+.gift-lid { 
+  position: absolute; top: 15px; left: 50%; transform: translateX(-50%);
+  width: 220px; height: 60px; 
+  background: linear-gradient(135deg, #ff8eb8, #f0528a); 
+  border-radius: 8px; 
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
+  transform-origin: bottom center;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15), inset 0 5px 10px rgba(255,255,255,0.3);
+  z-index: 2;
+}
+.gift-lid::before {
+  content: ''; position: absolute; width: 30px; height: 100%;
+  background: rgba(255,255,255,0.5); left: 50%; transform: translateX(-50%);
+}
+.gift-bow { 
+  position: absolute; top: -35px; left: 50%; transform: translateX(-50%); 
+  font-size: 55px; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2));
+  z-index: 3;
+}
+/* Opened State */
+.gift-lid.open { 
+  transform: translateX(-50%) translateY(-100px) rotate(-15deg); 
+  opacity: 0;
+}
+.gift-emoji { 
+  font-size: 65px; opacity: 0; transform: scale(0.5) translateY(20px);
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s; 
+  z-index: 4;
+}
+.gift-inner.opened .gift-emoji { 
+  opacity: 1; transform: scale(1) translateY(-50px); 
+}
+.gift-message { 
+  max-width: 520px; margin-top: 40px; 
+  background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 133, 179, 0.4); border-radius: 28px; 
+  padding: 35px 40px; font-family: 'Dancing Script', cursive; font-size: 24px; color: #8e1c4a; line-height: 1.6; 
+  opacity: 0; transform: translateY(30px); transition: all 0.8s ease 0.5s; pointer-events: none; 
+  box-shadow: 0 20px 50px rgba(232, 66, 122, 0.15);
+}
+.gift-message.revealed { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+/* ─── FOOTER ─── */
+.footer-section { position: relative; z-index: 1; padding: 60px 20px 80px; text-align: center; }
+.footer-hearts  { font-size: 32px; letter-spacing: 8px; margin-bottom: 16px; animation: pulseAnim 1.5s ease-in-out infinite; }
+@keyframes pulseAnim { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+.footer-text    { font-family: 'Dancing Script', cursive; font-size: 28px; color: var(--rose); }
+.footer-sub     { font-size: 14px; color: #c2185b; opacity: 0.7; margin-top: 8px; }
+
+/* ─── GỢI Ý THÊM ẢNH ─── */
+.edit-hint { background: linear-gradient(135deg, rgba(255,213,227,0.9), rgba(243,229,245,0.9)); border: 1.5px dashed var(--pink-4); border-radius: 16px; padding: 14px 20px; text-align: center; font-size: 13px; color: var(--rose); max-width: 640px; margin: 0 auto 40px; font-weight: 600; }
+
+/* ─── ĐÁP ỨNG THIẾT BỊ NARROW (DÀNH CHO VIEWPORT TRÒN HOẶC PREVIEW NHỎ) ─── */
+@media (max-width: 1000px) {
+  .pass-lamb { left: 12px; width: 130px; bottom: 20px; }
+  .pass-sheep { right: 12px; width: 130px; bottom: 20px; }
+  .pass-bunny { left: -90px; width: 155px; }
+  .pass-bear  { right: -90px; width: 155px; }
+  .pass-clouds { height: 200px; }
+  .pc1, .pc5 { width: 260px; height: 260px; bottom: -120px; }
+  .pc2, .pc4 { width: 190px; height: 190px; bottom: -100px; }
+}
+
+@media (max-width: 650px) {
+  .pass-lamb { left: 6px; width: 105px; bottom: 10px; }
+  .pass-sheep { right: 6px; width: 105px; bottom: 10px; }
+  .pass-bunny { left: -70px; width: 130px; }
+  .pass-bear  { right: -70px; width: 130px; }
+  .pass-clouds { height: 160px; }
+  .pc1, .pc5 { width: 210px; height: 210px; bottom: -100px; }
+  .pc2, .pc4 { width: 155px; height: 155px; bottom: -80px; }
+}
+
+/* ─── GALAXY PHOTO POPUP MODAL (Glassmorphism UI) ─── */
+.galaxy-modal {
+  position: fixed; inset: 0;
+  background: rgba(12, 0, 18, 0.55); /* Deep space transparent purple */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2000;
+  opacity: 0; pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.galaxy-modal.active {
+  opacity: 1; pointer-events: all;
+}
+.galaxy-modal-content {
+  position: relative;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  border-radius: 28px;
+  padding: 16px 16px 48px;
+  max-width: 350px; width: 85%;
+  box-shadow: 
+    0 30px 80px rgba(255, 133, 179, 0.35),
+    inset 0 0 24px rgba(255, 255, 255, 0.6);
+  transform: scale(0.6) rotate(-8deg);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.galaxy-modal.active .galaxy-modal-content {
+  transform: scale(1) rotate(0deg);
+}
+.galaxy-modal-img-wrap {
+  width: 100%;
+  aspect-ratio: 1.05;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1.5px solid rgba(255, 133, 179, 0.25);
+  box-shadow: 0 8px 24px rgba(255, 133, 179, 0.12);
+}
+.galaxy-modal-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.galaxy-modal-caption {
+  font-family: 'Dancing Script', cursive;
+  font-size: 26px;
+  color: #7d495d;
+  text-align: center;
+  margin-top: 18px;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
+}
+.galaxy-modal-close {
+  position: absolute;
+  top: -16px; right: -16px;
+  width: 38px; height: 38px;
+  background: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  color: #ff5c98;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 16px rgba(255, 133, 179, 0.22);
+  transition: all 0.25s ease-out;
+}
+.galaxy-modal-close:hover {
+  transform: scale(1.15) rotate(90deg);
+  color: #e8427a;
+  background: #fff5f8;
+}
+
+@keyframes modalParticle {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1) rotate(360deg);
+    opacity: 0;
+  }
+}

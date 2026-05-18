@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💕 Happy 1st Anniversary 💕</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600&family=Itim&display=swap" rel="stylesheet">
+
+<!-- Style (tách riêng để dễ sửa giao diện) -->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ==================== MÀN 1: MẬT KHẨU ==================== -->
+<div class="screen" id="screenPass">
+  <div class="pass-stars-bg" id="passStarsBg"></div>
+
+  <!-- Sao băng lung linh (Shooting Stars) -->
+  <div class="shooting-star-left"></div>
+  <div class="shooting-star-right"></div>
+
+  <!-- Sao màu sắc sparkle -->
+  <div class="pass-sparkles" id="passSparkles"></div>
+
+  <!-- Mây tím phía dưới -->
+  <div class="pass-clouds">
+    <div class="pass-cloud pc1"></div>
+    <div class="pass-cloud pc2"></div>
+    <div class="pass-cloud pc3"></div>
+    <div class="pass-cloud pc4"></div>
+    <div class="pass-cloud pc5"></div>
+  </div>
+
+  <!-- 🐱 Mèo ôm tim (trái dưới góc màn hình) -->
+  <div class="pass-animal pass-lamb">
+    <img src="cat.png" alt="Mèo ôm tim kawaii" style="width:100%;height:100%;object-fit:contain;">
+  </div>
+
+  <!-- 🐑 Cừu đội nón tím (phải dưới góc màn hình) -->
+  <div class="pass-animal pass-sheep">
+    <img src="sheep.png" alt="Cừu đội nón kawaii" style="width:100%;height:100%;object-fit:contain;">
+  </div>
+
+  <!-- 📱 PHONE WRAPPER: Giúp thỏ và gấu bám chặt viền điện thoại -->
+  <div class="phone-container">
+    <!-- 🐰 Thỏ ôm bên trái -->
+    <div class="pass-animal pass-bunny">
+      <img src="bunny.png" alt="Thỏ kawaii" style="width:100%;height:100%;object-fit:contain;">
+    </div>
+
+    <!-- 🐻 Gấu ôm bên phải -->
+    <div class="pass-animal pass-bear">
+      <img src="bear.png" alt="Gấu kawaii" style="width:100%;height:100%;object-fit:contain;">
+    </div>
+
+    <!-- Các chi tiết trang trí bay quanh thẻ (gác sát Bunny/Bear y hệt ảnh mẫu) -->
+    <div class="pass-decor decor-heart-left">💖</div>
+    <div class="pass-decor decor-paw-right">🐾</div>
+    <div class="pass-decor decor-star-left">⭐</div>
+    <div class="pass-decor decor-heart-top-left">💗</div>
+    <div class="pass-decor decor-heart-top-right">💖</div>
+
+    <!-- Hộp nhập mật khẩu (Smartphone Card) -->
+    <div class="pass-box">
+      <!-- Khoá gấu dễ thương đè lên viền trên -->
+      <div class="pass-lock">
+        <img src="lock.png" alt="Khoá gấu" style="width: 100px; height: auto;">
+      </div>
+
+      <div class="pass-title">Nhập mật khẩu tình yêu<br>để vào vũ trụ của thúi 💙</div>
+      <p class="pass-hint">💡 Gợi ý: ngày mình bắt đầu yêu nhau</p>
+
+      <!-- Dots trái tim -->
+      <div class="pass-dots" id="passDots">
+        <div class="pass-dot" id="d0">♡</div>
+        <div class="pass-dot" id="d1">♡</div>
+        <div class="pass-dot" id="d2">♡</div>
+        <div class="pass-dot" id="d3">♡</div>
+      </div>
+
+      <!-- Bàn phím số thiết kế Retro bong bóng cực thương -->
+      <div class="pass-keypad">
+        <button class="pass-key" onclick="pressKey('1')">1<span class="key-icon">🧸</span></button>
+        <button class="pass-key" onclick="pressKey('2')">2<span class="key-icon">🍓</span></button>
+        <button class="pass-key" onclick="pressKey('3')">3<span class="key-icon">🎀</span></button>
+        <button class="pass-key" onclick="pressKey('4')">4<span class="key-icon">🥤</span></button>
+        <button class="pass-key" onclick="pressKey('5')">5<span class="key-icon">💌</span></button>
+        <button class="pass-key" onclick="pressKey('6')">6<span class="key-icon">🍭</span></button>
+        <button class="pass-key" onclick="pressKey('7')">7<span class="key-icon">🍒</span></button>
+        <button class="pass-key" onclick="pressKey('8')">8<span class="key-icon">🧁</span></button>
+        <button class="pass-key" onclick="pressKey('9')">9<span class="key-icon">🌸</span></button>
+        <button class="pass-key key-envelope" onclick="pressKey('del')">🔙</button>
+        <button class="pass-key" onclick="pressKey('0')">0<span class="key-icon">💖</span></button>
+        <button class="pass-key key-clear" onclick="pressKey('clr')">✕</button>
+      </div>
+
+      <!-- Trái tim phát sáng ở đáy điện thoại -->
+      <div class="pass-bottom-heart">
+        <svg viewBox="0 0 32 29.6" width="32" height="30" style="filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));">
+          <defs>
+            <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff85b3" />
+              <stop offset="100%" stop-color="#ff2e93" />
+            </linearGradient>
+          </defs>
+          <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+          c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z" fill="url(#heartGrad)"/>
+        </svg>
+      </div>
+
+      <div class="pass-error" id="passError">❌ Sai mật khẩu rồi thúi ơi!</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ==================== MÀN 2: GALAXY ==================== -->
+<div class="screen hidden" id="screenGalaxy">
+  <canvas id="galaxyBigCanvas"></canvas>
+
+  <div class="galaxy-content">
+
+    <!-- Hộp thơ tình yêu bên trái (TikTok Poetry Card) -->
+    <div class="galaxy-poetry-card">
+      <p class="poetry-line" style="animation-delay: 0.2s">Thúi yêu của chồn,</p>
+      <p class="poetry-line" style="animation-delay: 0.8s">Trái tim chồn như vũ trụ này,</p>
+      <p class="poetry-line" style="animation-delay: 1.4s">Luôn xoay quanh nụ cười của thúi.</p>
+      <p class="poetry-line" style="animation-delay: 2.0s">Mỗi ngôi sao lấp lánh là một lời hứa,</p>
+      <p class="poetry-line" style="animation-delay: 2.6s">Rằng chồn sẽ bên thúi mãi mãi... 💕</p>
+    </div>
+
+    <!-- Lõi vũ trụ Galaxy cực đẹp (Cosmic Core Portal) -->
+    <div class="cosmic-core-wrap">
+      <div class="cosmic-aura"></div>
+      
+      <!-- Vòng đếm ngược to tròn định vị tại tâm vũ trụ -->
+      <div class="timer-ring-wrap" id="timerWrap">
+        <svg width="140" height="140" viewBox="0 0 140 140">
+          <defs>
+            <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%"   stop-color="#ff85b3"/>
+              <stop offset="50%"  stop-color="#c084fc"/>
+              <stop offset="100%" stop-color="#38bdf8"/>
+            </linearGradient>
+            <!-- Bộ lọc phát sáng neon cho lõi vũ trụ -->
+            <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="6" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+          <!-- Vòng hào quang quỹ đạo ẩn phía sau -->
+          <circle class="timer-ring-bg" cx="70" cy="70" r="60" stroke-width="4"/>
+          <!-- Vòng đếm ngược động phát sáng -->
+          <circle class="timer-ring-fg" id="timerRingFg" cx="70" cy="70" r="60" stroke-width="5"
+                  stroke-dasharray="377" stroke-dashoffset="0" filter="url(#neonGlow)"/>
+        </svg>
+
+        <!-- Trái tim/Ngôi sao neon nhịp đập ở chính tâm vũ trụ -->
+        <div class="cosmic-heart-center">
+          <svg viewBox="0 0 32 29.6" width="55" height="51" class="pulsing-heart">
+            <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+            c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z" fill="url(#timerGrad)"/>
+          </svg>
+        </div>
+
+        <div class="timer-text" id="timerText">20</div>
+      </div>
+
+      <!-- Tên hiển thị lãng mạn dưới lõi vũ trụ -->
+      <div class="portrait-name" id="portraitName"></div>
+    </div>
+
+    <!-- Nút mở thư (hiện sau khi đếm xong) -->
+    <button class="letter-reveal-btn" id="letterRevealBtn" onclick="goToPink()">
+      💌 Thư chồn gửi tặng thúi
+    </button>
+  </div>
+</div>
+
+
+<!-- ==================== MÀN 3: TRANG HỒNG ==================== -->
+<div id="screenPink">
+  <canvas id="petalCanvas"></canvas>
+
+  <!-- Nút nhạc góc phải -->
+  <div class="music-player" id="musicPlayer" onclick="toggleMusic()">
+    <span class="music-icon" id="musicIcon">🎵</span>
+    <span class="music-label" id="musicLabel">Nhạc tình yêu</span>
+    <div class="music-wave">
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+    </div>
+  </div>
+
+  <!-- 🎶 File nhạc — src được điền từ config.js (MUSIC_SRC) -->
+  <audio id="bgMusic" loop>
+    <source id="bgMusicSource" type="audio/mpeg">
+  </audio>
+
+  <!-- HERO -->
+  <section class="hero">
+    <!-- DECORATIONS FOR SIDES -->
+    <img src="bunny.png" alt="Bunny" class="hero-decor hero-bunny">
+    <img src="bear.png" alt="Bear" class="hero-decor hero-bear">
+    <img src="cat.png" alt="Cat" class="hero-decor hero-cat">
+    <img src="sheep.png" alt="Sheep" class="hero-decor hero-sheep">
+    <div class="hero-decor hero-heart hh-1">💖</div>
+    <div class="hero-decor hero-heart hh-2">🌸</div>
+    <div class="hero-decor hero-heart hh-3">✨</div>
+    <div class="hero-decor hero-heart hh-4">💕</div>
+
+    <div class="hero-badge">✨ Happy Anniversary ✨</div>
+    <!-- Tiêu đề & subtitle được điền từ config.js -->
+    <h1 class="hero-title" id="heroTitle"></h1>
+    <p class="hero-sub"    id="heroSubtitle"></p>
+    <div class="countdown-wrap">
+      <div class="count-box"><span class="count-num" id="cnt-days">0</span><span class="count-label">Ngày</span></div>
+      <div class="count-box"><span class="count-num" id="cnt-hours">0</span><span class="count-label">Giờ</span></div>
+      <div class="count-box"><span class="count-num" id="cnt-mins">0</span><span class="count-label">Phút</span></div>
+      <div class="count-box"><span class="count-num" id="cnt-secs">0</span><span class="count-label">Giây</span></div>
+    </div>
+  </section>
+
+  <!-- THƯ TÌNH -->
+  <section class="letter-section">
+    <h2 class="section-title">💌 Thư Tay Gửi Thúi</h2>
+    <div class="letter-container">
+      <div class="letter-lines"></div>
+      <div class="letter-text" id="letterText"></div>
+      <!-- Chữ ký — được điền từ config.js -->
+      <div class="letter-sign" id="letterSign"></div>
+    </div>
+  </section>
+
+  <!-- ALBUM ẢNH -->
+  <section class="album-section">
+    <h2 class="section-title" style="text-align:center">📸 Album Kỷ Niệm</h2>
+    <div class="album-grid" id="albumGrid"></div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline-section">
+    <h2 class="section-title" style="text-align:center">✨ Hành Trình Của Chúng Mình</h2>
+    <div class="timeline" id="timeline"></div>
+  </section>
+
+  <!-- HỘP QUÀ -->
+  <section class="gift-section">
+    <h2 class="section-title">🎁 Hộp Quà Bí Mật</h2>
+    <p style="color:#c2185b;margin-bottom:32px;font-size:15px">Click để mở nhé! 🎀</p>
+    <div class="gift-box" id="giftBox" onclick="openGift()">
+      <div class="gift-lid" id="giftLid">
+        <div class="gift-ribbon-h"></div>
+        <div class="gift-ribbon-v"></div>
+        <span class="gift-bow">🎀</span>
+      </div>
+      <div class="gift-inner" id="giftInner">
+        <span class="gift-emoji">💝</span>
+      </div>
+    </div>
+    <!-- Tin nhắn quà — được điền từ config.js -->
+    <div class="gift-message" id="giftMessage"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <section class="footer-section">
+    <div class="footer-hearts">💕💝💕</div>
+    <!-- Chữ footer — được điền từ config.js -->
+    <p class="footer-text" id="footerText"></p>
+    <p class="footer-sub"  id="footerSub"></p>
+  </section>
+</div>
+
+
+<!-- Thư viện Three.js cho hiệu ứng 3D siêu lộng lẫy và mượt mà -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<!-- Config (thông tin cá nhân — sửa file này) -->
+<script src="config.js"></script>
+
+<!-- Logic tương tác (không cần sửa) -->
+<script src="script.js"></script>
+</body>
+</html>
